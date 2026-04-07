@@ -1,6 +1,12 @@
 # ATS API Endpoints
 
-Free, public, no authentication required. Use WebFetch to call these.
+> **Cowork sandbox note:** These API domains (boards-api.greenhouse.io,
+> api.lever.co, api.ashbyhq.com, api.smartrecruiters.com, *.myworkdayjobs.com)
+> are blocked by the Cowork network proxy. Do NOT call them directly via WebFetch.
+> Use WebSearch with site-scoped queries instead (see skills/scan/SKILL.md).
+> This file is kept as a reference for URL pattern detection and slug extraction.
+
+Free, public, no authentication required (but blocked in Cowork sandbox).
 
 ## Greenhouse
 

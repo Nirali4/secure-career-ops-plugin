@@ -16,7 +16,7 @@ description: |
 model: haiku
 color: cyan
 tools:
-  - WebFetch
+  - WebSearch
   - Read
   - Write
 maxTurns: 10
@@ -30,8 +30,10 @@ You will receive:
 - The user's target roles and skills from their profile
 
 Steps:
-1. Call the appropriate ATS API endpoint (see the ats-endpoints reference)
-2. Parse the JSON response
+1. Build a site-scoped WebSearch query using the ATS type and slug
+   (e.g. `site:jobs.ashbyhq.com/{slug} {target role keywords}`)
+   See references/ats-endpoints.md for URL patterns per ATS.
+2. Parse search results — extract job title, URL, location if available
 3. Filter jobs by title relevance to target roles
 4. Return a structured list: title, location, URL, relevance score (0-10)
 

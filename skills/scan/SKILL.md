@@ -1,12 +1,11 @@
 ---
 name: scan
-description: "Scan company career pages and ATS portals for job openings that match your profile. Supports Greenhouse, Lever, Ashby, SmartRecruiters, and Workday APIs. Use when someone says 'scan for jobs', 'check careers page', 'find openings at', or 'search for roles'."
+description: "Scan company career pages for job openings that match your profile. Uses web search with site-scoped queries to find listings on Greenhouse, Lever, Ashby, SmartRecruiters, and other ATS platforms. Use when someone says 'scan for jobs', 'check careers page', 'find openings at', or 'search for roles'."
 argument-hint: "<company name, careers URL, or 'all' to scan watchlist>"
 user-invocable: true
 allowed-tools:
   - Read
   - Write
-  - WebFetch
   - WebSearch
   - Glob
 ---
@@ -14,7 +13,8 @@ allowed-tools:
 # Scan for Job Openings
 
 Search company career portals for roles matching your profile.
-Read references/ats-endpoints.md for API details.
+Use ATS type and slug detection (see references/ats-endpoints.md) to build
+targeted site-scoped WebSearch queries.
 
 ## Step 0: Load Context
 
@@ -34,7 +34,7 @@ Parse user input:
   - `jobs.lever.co/{slug}` -> Lever
   - `jobs.ashbyhq.com/{slug}` or `{company}.ashbyhq.com` -> Ashby
   - `jobs.smartrecruiters.com/{slug}` -> SmartRecruiters
-  - Other -> attempt WebFetch on the page
+  - Other -> use WebSearch with `{company name} careers {role keywords}`
 - **"all" / "scan my watchlist":** Scan every enabled company in portals.yml.
   If no portals.yml exists, tell the user:
   > "You don't have a company watchlist yet. Tell me some companies
@@ -44,33 +44,38 @@ Parse user input:
 
 ## Step 2: Fetch Job Listings
 
-### Tier 1: JSON API (preferred, fast, structured)
+### Tier 1: WebSearch (primary)
 
-Use WebFetch to call these endpoints. See references/ats-endpoints.md for details.
+Use WebSearch with targeted site-scoped queries to find job listings.
+Use the ATS type and slug identified in Step 1 to build precise queries.
 
-**Greenhouse:**
-`GET https://boards-api.greenhouse.io/v1/boards/{slug}/jobs?content=true`
+**Search strategy by ATS:**
 
-**Lever:**
-`GET https://api.lever.co/v0/postings/{slug}`
+- **Ashby:** `site:jobs.ashbyhq.com/{slug} {target role keywords}`
+- **Lever:** `site:jobs.lever.co/{slug} {target role keywords}`
+- **Greenhouse:** `site:job-boards.greenhouse.io/{slug} {target role keywords}`
+  (Note: Greenhouse pages are poorly indexed. If no results, try
+  `{company name} careers {target role keywords} greenhouse`)
+- **SmartRecruiters:** `site:jobs.smartrecruiters.com/{slug} {target role keywords}`
+- **Workday:** `site:{tenant}.myworkdayjobs.com {target role keywords}`
+- **Generic / unknown ATS:** `{company name} careers {target role keywords} {current year}`
 
-**Ashby:**
-`GET https://api.ashbyhq.com/posting-api/job-board/{slug}?includeCompensation=true`
+**Build target role keywords** from the profile: combine primary_role,
+secondary_roles, and top 3 skills. Example for a marketing director:
+`marketing director OR head of marketing OR VP marketing`
 
-**SmartRecruiters:**
-`GET https://api.smartrecruiters.com/v1/companies/{slug}/postings`
+**Parse search results:** Each result typically contains the job title
+in the link text and the URL to the posting. Extract title and URL from
+each search result. If the search returns descriptions, extract location
+and department info as well.
 
-Parse the JSON response. Extract: title, location, department, URL, description.
+**Run multiple queries if needed:** One for the primary role, one for
+secondary roles. Deduplicate by URL before filtering.
 
-### Tier 2: WebFetch for HTML career pages
+### Tier 2: Manual Fallback
 
-If the company uses a non-API ATS or custom career page, use WebFetch
-to retrieve the HTML. Parse job listings from the page content.
-
-### Tier 3: Fallback
-
-If WebFetch is unavailable or the page requires JavaScript:
-> "I can't scan {company}'s career page automatically. Here's their
+If WebSearch fails to return results:
+> "I couldn't find listings automatically for {company}. Here's their
 > careers URL: {url}. You can browse it and paste any interesting
 > job postings for me to evaluate."
 
