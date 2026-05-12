@@ -8,7 +8,7 @@ allowed-tools:
   - Read
   - Write
   - Glob
-  - WebFetch
+  - safeFetch
 ---
 
 # Application Form Assistant

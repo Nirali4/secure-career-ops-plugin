@@ -6,7 +6,9 @@ argument-hint: "<paste JD or URL>"
 user-invocable: true
 allowed-tools:
   - Read
-  - WebFetch
+  - Write
+  - Glob
+  - safeFetch
 ---
 
 # Quick Evaluation
@@ -21,7 +23,7 @@ Read `data/profile.yml`. If missing:
 
 ## Step 1: Parse JD
 
-Accept pasted text, URL (use WebFetch), or file path.
+Accept pasted text, URL (use safeFetch), or file path.
 Extract: title, company, location, key requirements, seniority signals.
 
 ## Step 2: Quick Score
