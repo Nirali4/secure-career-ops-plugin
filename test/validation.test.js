@@ -38,7 +38,7 @@ assert.doesNotThrow(() => {
 // Test disallowed hostname
 assert.throws(() => {
   validateUrl('https://evil.com/malicious');
-}, /Domain not allowed/, 'Disallowed hostname should throw');
+}, /Access denied to/, 'Disallowed hostname should throw');
 
 // Test safeFetch sanitisation (script removal)
 (async () => {
