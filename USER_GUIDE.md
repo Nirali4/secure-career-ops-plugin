@@ -1,6 +1,6 @@
 # Career-Ops Plugin: Quick Start Guide
 
-Welcome! This AI assistant helps you land your next job by acting as your personal career strategist. It can rate your match for a job, tailor your resume, and even help track your applications. 
+Welcome! This AI assistant helps you land your next job by acting as your personal career strategist. This work is an enhanced version of the original Career-Ops plugin byAndrew Shwetzer in terms of Security and efficiency. It can rate your match for a job, tailor your resume, and even help track your applications. 
 
 Here is how to use it in 3 simple steps:
 
