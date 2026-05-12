@@ -2,8 +2,16 @@
 
 Welcome! This AI assistant helps you land your next job by acting as your personal career strategist. This work is an enhanced version of the original Career-Ops plugin byAndrew Shwetzer in terms of Security and efficiency. It can rate your match for a job, tailor your resume, and even help track your applications. 
 
-Here is how to use it in 3 simple steps:
+## Step 0: Installation
+Before you can use these commands, you need to load the plugin into your Claude AI tool:
 
+1. **Find your folder**: Make sure you know where you downloaded this `career-ops-plugin` folder.
+2. **Open Claude**: Open your Claude Desktop app or the Cowork interface.
+3. **Load the Plugin**: 
+   - If using the **Command Line**, type: `claude --plugin-dir ./career-ops-plugin`
+   - If using the **Menu**, go to "Add Plugin" and select this folder.
+
+---
 ## Step 1: Tell it about yourself
 Before the AI can help you, it needs to know what you do.
 1. Open your chat.

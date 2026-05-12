@@ -14,6 +14,32 @@ const ALLOWED_HOSTNAMES = [
   "api.indeed.com",
   "api.linkedin.com",
   "myworkdayjobs.com",
+  "amazon.jobs",
+  "google.com",
+  "microsoft.com",
+
+  // --- Canadian Banking (Big 5 & Others) ---
+  "cibc.com",                // CIBC
+  "jobs.scotiabank.com",     // Scotiabank
+  "rbc.com",            // RBC (Royal Bank of Canada)
+  "td.com",             // TD Bank
+  "bmo.com",            // BMO (Bank of Montreal)
+  "desjardins.com",          // Desjardins Group
+  "nbc.ca",                  // National Bank of Canada
+
+  // --- Canadian Telecommunications & Tech ---
+  "rogers.com",         // Rogers Communications
+  "telus.com",          // TELUS
+  "bce.ca",                  // Bell Canada Enterprises
+  "equinix.com",     // Equinix (Data Centers)
+  "blackberry.com",          // BlackBerry
+  "cgi.com",                 // CGI
+
+  // --- Major Retail & Transport ---
+  "loblaw.ca",               // Loblaw Companies Ltd.
+  "aircanada.com",   // Air Canada
+  "cn.ca",                   // CN Rail
+  "cpkcr.com"                // CPKC Rail
 ];
 
 
@@ -116,7 +142,7 @@ async function safeFetch(urlStr, options = {}) {
   const minifiedText = sanitizeHtml(raw, {
     allowedTags: [], // Strip everything to get pure text
     allowedAttributes: {},
-    nonTextTags: [ 'style', 'script', 'textarea', 'noscript', 'nav', 'footer', 'header', 'aside', 'svg', 'iframe' ]
+    nonTextTags: ['style', 'script', 'textarea', 'noscript', 'nav', 'footer', 'header', 'aside', 'svg', 'iframe']
   });
 
   // Log the successful fetch event to our zero-token audit log
