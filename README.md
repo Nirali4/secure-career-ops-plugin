@@ -71,3 +71,15 @@ calls for job scanning).
 ## License
 
 MIT. See [ATTRIBUTION.md](ATTRIBUTION.md) for credits.
+
+
+## Security Considerations
+
+This fork of **career-ops-plugin** includes a hardened fetch utility to protect against insecure external requests.
+
+- All URL fetching now goes through `security/validation.js` which enforces **HTTPS only**, validates the hostname against an allow‑list, limits response size to **5 MB**, and strips potentially dangerous `<script>` / `<iframe>` tags.
+- The allow‑list can be extended in `security/validation.js` if you need to trust additional domains.
+- No raw `WebFetch` calls remain in the skill or command definitions – they have been replaced with the safe `safeFetch` wrapper.
+- A pre‑commit hook prevents accidental commits of any files under the `data/` directory, ensuring personal resume or application data never gets pushed to a remote repository.
+
+Feel free to review `security/validation.js` for implementation details and adjust the whitelist as needed.

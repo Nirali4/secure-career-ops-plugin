@@ -8,7 +8,7 @@ allowed-tools:
   - Write
   - Glob
   - WebSearch
-  - WebFetch
+  - safeFetch
 ---
 
 # Evaluate a Job Posting
@@ -37,8 +37,8 @@ detailed matching).
 Accept input as:
 
 - **Pasted text:** Use directly
-- **URL:** Use WebFetch to retrieve the page. Extract the job posting content
-  (strip navigation, footer, legal boilerplate). If WebFetch is unavailable,
+- **URL:** Use safeFetch to retrieve the page. Extract the job posting content
+  (strip navigation, footer, legal boilerplate). If safeFetch is unavailable,
   ask the user to paste the text instead.
 - **File path:** Read the file
 

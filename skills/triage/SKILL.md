@@ -7,7 +7,7 @@ allowed-tools:
   - Read
   - Write
   - Glob
-  - WebFetch
+  - safeFetch
 ---
 
 # Triage Pipeline
@@ -34,8 +34,8 @@ If pipeline is empty:
 
 For each pipeline entry with status "New":
 
-1. Fetch the full JD if only a URL is stored (use WebFetch)
-2. If WebFetch unavailable, score based on title + location only (partial)
+1. Fetch the full JD if only a URL is stored (use safeFetch)
+2. If safeFetch unavailable, score based on title + location only (partial)
 3. Quick-score on 3 dimensions:
    - **Title fit** (0-5): How well does the title match target roles?
    - **Requirements fit** (0-5): If JD available, how many requirements match?

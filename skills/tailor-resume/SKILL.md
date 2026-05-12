@@ -35,14 +35,22 @@ From the evaluation + JD, extract 15-20 keywords that ATS systems scan for:
 - Certifications, tools, methodologies named in the JD
 - Action verbs that match the responsibilities section
 
-## Step 2: Detect Language & Locale
+## Step 2: Strict Anti-Hallucination & ATS Match Target (80-90%)
+
+You MUST optimize the resume to hit an **80-90% ATS match score** (similar to Jobscan) by integrating the extracted keywords. However, you are bound by these strict rules:
+1. **Never invent experience, skills, or metrics.** Only use facts explicitly stated in the provided profile/resume.
+2. **Address missing skills honestly.** If highly important skills or tools from the JD are missing in the candidate's experience, do NOT lie by adding them to past job responsibilities. Instead, add a generic, truthful phrasing such as "Have knowledge of [Skill A, Skill B]" or "Familiar with [Tool C]" in the Skills or Summary section. This ensures the ATS keywords are present without fabricating past work experience.
+3. **Enhance, don't fabricate.** Rewrite existing bullets to mirror the exact phrasing and terminology of the JD (e.g., change "Managed team" to "Directed cross-functional team" if the JD uses that phrasing AND it remains truthful).
+4. **Natural Keyword Integration:** Weave keywords naturally into the Professional Summary and Skills sections to boost the ATS score without keyword stuffing.
+
+## Step 3: Detect Language & Locale
 
 - JD in English + US company: Letter paper (8.5" x 11")
 - JD in English + non-US: A4
 - JD in another language: match that language, use A4
 - Resume language MUST match JD language
 
-## Step 3: Build Resume Content
+## Step 4: Build Resume Content
 
 Using the evaluation's Block E (Tailoring Plan) as a guide, construct
 each resume section from profile data:
@@ -79,7 +87,7 @@ each resume section from profile data:
 - Only include if the archetype values it (Creative, Technology)
 - Brief description + link + key metric
 
-## Step 4: Generate HTML
+## Step 5: Generate HTML
 
 Read the template from references/resume-template.html.
 
@@ -96,7 +104,7 @@ ATS compliance rules (from references/ats-rules.md):
 - No headers/footers (ATS strips them)
 - Max 2 pages
 
-## Step 5: Output
+## Step 6: Output
 
 Write the HTML to `data/resumes/{company-slug}-{role-slug}.html`.
 
@@ -116,7 +124,7 @@ Show the user a preview of the content (not the HTML code):
 **Keywords matched:** {n}/20 from the JD
 ```
 
-## Step 6: PDF Instructions
+## Step 7: PDF Instructions
 
 > "Your tailored resume is saved at `data/resumes/{filename}.html`.
 >
@@ -128,13 +136,13 @@ Show the user a preview of the content (not the HTML code):
 >
 > The HTML is designed to print cleanly. What you see is what you get."
 
-## Step 7: Update Tracker
+## Step 8: Update Tracker
 
 Update the matching row in `data/applications.md`:
 - Status: "Resume Ready" (if currently "Evaluated")
 - Notes: append "Resume: {filename}"
 
-## Step 8: Next Steps
+## Step 9: Next Steps
 
 > "Resume is ready! Next steps:
 > - **Review it** by opening the HTML file

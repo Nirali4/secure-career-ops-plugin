@@ -1,8 +1,9 @@
 # Candidate data (PII protection)
 data/
 config/
-
+improvement-artifacts/
 # OS files
 .DS_Store
 Thumbs.db
 prd/
+node_modules/

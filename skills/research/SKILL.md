@@ -7,7 +7,7 @@ allowed-tools:
   - Read
   - Write
   - WebSearch
-  - WebFetch
+  - safeFetch
   - Glob
 ---
 

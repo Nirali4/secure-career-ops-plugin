@@ -1,0 +1,14 @@
+{
+  "name": "career-ops-plugin-optimised",
+  "version": "1.0.0",
+  "description": "Optimised version of career-ops-plugin with security fixes",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test/validation.test.js"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "sanitize-html": "^2.17.3"
+  }
+}
