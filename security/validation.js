@@ -34,11 +34,14 @@ function validateUrl(urlStr) {
     throw new Error("Only HTTPS URLs are permitted");
   }
   const hostname = url.hostname.toLowerCase();
-  const isAllowed = ALLOWED_HOSTNAMES.some((allowed) =>
-    hostname === allowed || hostname.endsWith(`.${allowed}`)
-  );
+  const isAllowed = ALLOWED_HOSTNAMES.some((allowed) => {
+    const target = allowed.toLowerCase();
+    return hostname === target || hostname.endsWith(`.${target}`);
+  });
   if (!isAllowed) {
-    throw new Error(`Domain not allowed: ${hostname}`);
+    // Sanitize hostname in error message to prevent log injection
+    const safeHostname = hostname.replace(/[^\w.-]/g, '').substring(0, 253);
+    throw new Error(`Domain not allowed: ${safeHostname}`);
   }
   return url;
 }
@@ -67,7 +70,9 @@ async function safeFetch(urlStr, options = {}) {
 
   if (!response.ok && response.type !== 'opaqueredirect') {
     clearTimeout(timeout);
-    throw new Error(`Fetch failed with status ${response.status}`);
+    // Sanitize status code in error message
+    const safeStatus = parseInt(response.status, 10) || 'Unknown';
+    throw new Error(`Fetch failed with status ${safeStatus}`);
   }
 
   // If manual redirect resulted in 3xx, we do not follow it automatically.
