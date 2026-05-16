@@ -25,7 +25,7 @@ This fork of **career-ops-plugin** is hardened for enterprise-ready security and
 - **Hardened Fetching (`safeFetch`)**: All URL fetching is routed through `security/validation.js` which enforces **HTTPS only**, validates hostnames against a strict whitelist, and blocks SSRF via manual redirect handling.
 - **Aggressive Token Optimization**: To reduce AI costs, all fetched job descriptions are automatically stripped of HTML tags and boilerplate (navbars, footers, etc.) before reaching the AI. This typically reduces input token usage by **50% to 80%**.
 - **Enterprise Audit Logging**: A native, zero-token audit logger (`security/audit.js`) records every external fetch event (timestamp, URL, and payload size) to `data/audit.log` for compliance tracking.
-- **Anti-Hallucination Guardrails**: The `tailor-resume` skill is hardcoded with strict rules to prevent the AI from inventing facts or lying. It targets an 80-90% ATS match score while maintaining 100% truthfulness.
+- **Anti-Hallucination Guardrails**: The `tailor-resume` skill is hardcoded with strict rules to prevent the AI from inventing facts or lying. It targets an 70-90% ATS match score while maintaining 100% truthfulness.
 - **PII Leak Prevention**: A pre-commit hook and `.gitignore` policy ensure the `data/` directory (resumes, evaluations, profile) never leaves your local machine.
 - **Static Analysis Verified**: The codebase is refactored to pass standard security scanners (like `graudit`) with zero flags, ensuring robust and clean implementation.
 
